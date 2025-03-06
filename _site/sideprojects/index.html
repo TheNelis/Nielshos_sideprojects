@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Welkom! Hier laat ik al mijn sideprojects zien die niet op mijn portfolio staan, maar wel een plekje verdienen!">
+
+<link rel="shortcut icon" href="/assets/favicon.ico" type="image/x-icon">
+<link rel="stylesheet" href="/css/all-styles.css">
+
+<script type="importmap">
+    {
+        "imports": {
+            "three": "/js/three/three.module.js"
+        }
+    }
+</script>
+
+<title>Niels Hos Sideprojects</title>
+</head>
+<body>
+    <nav class="navcontainer">
+        <a href="/"><img class="navcontainer__logo" src="/assets/niels_logo_black.png" alt=""></a>
+        <div class="navcontainer__titlecontainer no-select">
+            <p id="title1" class="navcontainer__titlecontainer__title">Fullstack-Developer</p>
+            <p id="title2" class="navcontainer__titlecontainer__title">UX/UI Designer</p>
+            <p id="title3" class="navcontainer__titlecontainer__title">Graphic Designer</p>
+        </div>
+    </nav>
+
+    
+<canvas class="webgl"></canvas>
+
+<script type="module">
+    import * as THREE from 'three';
+
+    let sizes = {
+        width: window.innerWidth,
+        height: window.innerHeight
+    };
+
+    // Set scene and camera
+    const scene = new THREE.Scene();
+    scene.background = new THREE.Color("#FFDC2D");
+    const camera = new THREE.PerspectiveCamera(50, sizes.width / sizes.height, 0.1, 1000 );
+
+    // Set renderer and mount
+    const canvas = document.querySelector('.webgl');
+    const renderer = new THREE.WebGLRenderer({ canvas });
+    renderer.setSize( sizes.width, sizes.height );
+
+    // Create cube shape
+    const geometry = new THREE.BoxGeometry( 1, 1, 1 );
+    const material = new THREE.MeshBasicMaterial( { color: "#00BF72" } );
+    const cube = new THREE.Mesh( geometry, material );
+    scene.add( cube );
+
+    camera.position.z = 5;
+
+
+
+    // Render the scene and animate it
+    function animate() {
+        cube.rotation.x += 0.01;
+        cube.rotation.y += 0.01;
+        
+        renderer.render( scene, camera );
+    }
+    renderer.setAnimationLoop( animate );
+
+
+
+    // Fix window resize
+    window.addEventListener('resize', () => {
+        sizes.width = window.innerWidth;
+        sizes.height = window.innerHeight;
+
+        camera.updateProjectionMatrix();
+        camera.aspect = sizes.width / sizes.height;
+        renderer.setSize( sizes.width, sizes.height );
+    });
+</script>
+    
+    <div class="noise"></div>
+</body>
+</html>
+
+<script>
+    const titles = [
+        document.getElementById('title3'),
+        document.getElementById('title2'),
+        document.getElementById('title1')
+    ];
+
+    // Set initial styles
+    titles[0].style.opacity = 0;
+    titles[0].style.marginRight = '60px';
+    titles[1].style.opacity = 0;
+    titles[1].style.marginRight = '60px';
+    titles[2].style.opacity = 0;
+    titles[2].style.marginRight = '60px';
+
+    // Change styles animation
+    document.addEventListener("DOMContentLoaded", (event) => {
+        let counter = 0;
+        let i = setInterval(function(){
+            titles[counter].style.opacity = 1;
+            titles[counter].style.marginRight = '0px';
+
+            counter++;
+            if(counter === 3) {
+                clearInterval(i);
+            }
+        }, 300);
+    });
+</script>

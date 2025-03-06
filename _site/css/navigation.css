@@ -1,0 +1,56 @@
+@font-face {
+  font-family: "Lilita One";
+  src: url(../assets/fonts/Lilita_One/LilitaOne-Regular.ttf) format("truetype");
+}
+@font-face {
+  font-family: "Poppins-Regular";
+  src: url(../assets/fonts/Poppins/Poppins-Regular.ttf) format("truetype");
+}
+@font-face {
+  font-family: "Poppins-Semibold";
+  src: url(../assets/fonts/Poppins/Poppins-SemiBold.ttf) format("truetype");
+}
+@font-face {
+  font-family: "Poppins-Bold";
+  src: url(../assets/fonts/Poppins/Poppins-Bold.ttf) format("truetype");
+}
+@font-face {
+  font-family: "Poppins-Black";
+  src: url(../assets/fonts/Poppins/Poppins-Black.ttf) format("truetype");
+}
+.navcontainer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 40px;
+  font-family: "Poppins-Semibold";
+  font-size: 1.25rem;
+  z-index: 1000;
+}
+.navcontainer__logo {
+  width: 65px;
+}
+.navcontainer__titlecontainer {
+  display: flex;
+  gap: 5px;
+}
+.navcontainer__titlecontainer__title {
+  background-color: #FF445C;
+  font-size: 1.25rem;
+  text-transform: uppercase;
+  padding: 2px 15px;
+  border-radius: 20px;
+  transition: all 0.5s ease-in-out;
+  margin-right: 60px;
+  opacity: 0;
+}
+.navcontainer__titlecontainer__title:first-child {
+  background-color: #00BF72;
+}
+.navcontainer__titlecontainer__title:last-child {
+  background-color: #0078D7;
+}

@@ -1,0 +1,23 @@
+{
+  "name": "nielshos_sideprojects",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "start": "npx eleventy --serve",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "@11ty/eleventy": "^3.0.0",
+    "gulp": "^5.0.0",
+    "gulp-sass": "^6.0.0",
+    "sass": "^1.84.0",
+    "vite": "^6.1.0"
+  },
+  "dependencies": {
+    "three": "^0.173.0"
+  }
+}

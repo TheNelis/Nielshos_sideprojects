@@ -1,0 +1,63 @@
+@font-face {
+  font-family: "Lilita One";
+  src: url(../assets/fonts/Lilita_One/LilitaOne-Regular.ttf) format("truetype");
+}
+@font-face {
+  font-family: "Poppins-Regular";
+  src: url(../assets/fonts/Poppins/Poppins-Regular.ttf) format("truetype");
+}
+@font-face {
+  font-family: "Poppins-Semibold";
+  src: url(../assets/fonts/Poppins/Poppins-SemiBold.ttf) format("truetype");
+}
+@font-face {
+  font-family: "Poppins-Bold";
+  src: url(../assets/fonts/Poppins/Poppins-Bold.ttf) format("truetype");
+}
+@font-face {
+  font-family: "Poppins-Black";
+  src: url(../assets/fonts/Poppins/Poppins-Black.ttf) format("truetype");
+}
+* {
+  font-synthesis: none;
+}
+
+html {
+  font-family: "Poppins-Regular", Arial, Helvetica, sans-serif;
+  font-size: 16px;
+  overflow: hidden;
+}
+
+body {
+  background-color: #FFDC2D;
+  overflow: hidden;
+}
+
+.maincontainer {
+  display: flex;
+  flex-direction: column;
+  padding: 160px 15px 0;
+}
+@media only screen and (min-width: 992px) {
+  .maincontainer {
+    padding: 200px 40px 0;
+  }
+}
+
+.noise {
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-image: url(/assets/images/noise.gif);
+  opacity: 0.05;
+  width: 100%;
+  height: 100%;
+  z-index: 9999999999;
+  pointer-events: none;
+}
+
+.no-select {
+  -webkit-user-select: none; /* Safari */
+  -ms-user-select: none; /* IE 10 and IE 11 */
+  user-select: none; /* Standard syntax */
+}
