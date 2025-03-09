@@ -7,7 +7,10 @@ description: Welkom! Hier laat ik al mijn sideprojects zien die niet op mijn por
 <canvas class="webgl"></canvas>
 
 <script type="module">
-    import * as THREE from 'three';
+    import * as THREE from '/js/three/three.module.js';
+    import { CSS2DRenderer, CSS2DObject } from '/js/CSS2DRenderer.js';
+    import { OrbitControls } from '/js/OrbitControls.js';
+
 
     let sizes = {
         width: window.innerWidth,
@@ -20,15 +23,70 @@ description: Welkom! Hier laat ik al mijn sideprojects zien die niet op mijn por
     const camera = new THREE.PerspectiveCamera(50, sizes.width / sizes.height, 0.1, 1000 );
 
     // Set renderer and mount
-    const canvas = document.querySelector('.webgl');
-    const renderer = new THREE.WebGLRenderer({ canvas });
+    const renderer = new THREE.WebGLRenderer({ antialias: true });
     renderer.setSize( sizes.width, sizes.height );
+    renderer.domElement.style.position = 'absolute';
+    renderer.domElement.style.top = '0px';
+    document.body.appendChild(renderer.domElement);
 
-    // Create cube shape
-    const geometry = new THREE.BoxGeometry( 1, 1, 1 );
+    // Controls
+    const controls = new OrbitControls(camera, renderer.domElement);
+    controls.update();
+
+    // Set 2D elements
+    const htmlRenderer = new CSS2DRenderer();
+    htmlRenderer.setSize(sizes.width, sizes.height);
+    htmlRenderer.domElement.style.position = 'absolute';
+    htmlRenderer.domElement.style.top = '0px';
+    htmlRenderer.domElement.style.pointerEvents = 'none';
+    document.body.appendChild(htmlRenderer.domElement);
+
+    // Case images
+    function createCaseImage(url, x, y, z) {
+        const img = new Image();
+        img.src = `${url}`;
+        return img;
+    };
+
+    const imageDiv = document.createElement('div');
+    imageDiv.classList.add('caseContainer');
+
+    const image1 = createCaseImage('https://fakeimg.pl/300x200', 0, 0, 2);
+    imageDiv.appendChild(image1);
+    const image2 = createCaseImage('https://fakeimg.pl/300x200', 1, 0, 2);
+    imageDiv.appendChild(image2);
+    const image3 = createCaseImage('https://fakeimg.pl/300x200', -1, 0, 2);
+    imageDiv.appendChild(image3);
+    const image4 = createCaseImage('https://fakeimg.pl/300x200', 0, 0, 2);
+    imageDiv.appendChild(image4);
+    const image5 = createCaseImage('https://fakeimg.pl/300x200', 1, 0, 2);
+    imageDiv.appendChild(image5);
+    const image6 = createCaseImage('https://fakeimg.pl/300x200', -1, 0, 2);
+    imageDiv.appendChild(image6);
+    const image7 = createCaseImage('https://fakeimg.pl/300x200', -1, 0, 2);
+    imageDiv.appendChild(image7);
+    const image8 = createCaseImage('https://fakeimg.pl/300x200', 0, 0, 2);
+    imageDiv.appendChild(image8);
+    const image9 = createCaseImage('https://fakeimg.pl/300x200', 1, 0, 2);
+    imageDiv.appendChild(image9);
+    const image10 = createCaseImage('https://fakeimg.pl/300x200', -1, 0, 2);
+    imageDiv.appendChild(image10);
+    const image11 = createCaseImage('https://fakeimg.pl/300x200', -1, 0, 2);
+    imageDiv.appendChild(image11);
+
+    const imageContainer = new CSS2DObject(imageDiv);
+    imageContainer.position.set(0, 0, 2);
+    scene.add(imageContainer);
+
+    // Create 3D Elements
+    const geometry = new THREE.BoxGeometry( 3, 1, 1 );
     const material = new THREE.MeshBasicMaterial( { color: "#00BF72" } );
     const cube = new THREE.Mesh( geometry, material );
     scene.add( cube );
+
+    const edges = new THREE.EdgesGeometry( geometry );
+    const line = new THREE.LineSegments(edges, new THREE.LineBasicMaterial( { color: 0xffffff } ) ); 
+    scene.add( line );
 
     camera.position.z = 5;
 
@@ -36,10 +94,14 @@ description: Welkom! Hier laat ik al mijn sideprojects zien die niet op mijn por
 
     // Render the scene and animate it
     function animate() {
-        cube.rotation.x += 0.01;
-        cube.rotation.y += 0.01;
+        // cube.rotation.x += 0.01;
+        // cube.rotation.y += 0.01;
+        // line.rotation.x += 0.01;
+        // line.rotation.y += 0.01;
         
-        renderer.render( scene, camera );
+
+        htmlRenderer.render(scene, camera);
+        renderer.render(scene, camera);
     }
     renderer.setAnimationLoop( animate );
 
@@ -53,5 +115,6 @@ description: Welkom! Hier laat ik al mijn sideprojects zien die niet op mijn por
         camera.updateProjectionMatrix();
         camera.aspect = sizes.width / sizes.height;
         renderer.setSize( sizes.width, sizes.height );
+        htmlRenderer.setSize( sizes.width, sizes.height );
     });
 </script>

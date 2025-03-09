@@ -15,10 +15,10 @@
     background-color: transparent;
     margin: 0 v.$margin-desktop;
     position: fixed;
-    bottom: 0;
+    bottom: -50%;
     left: 0;
     pointer-events: none;
-    transition: bottom 1s ease-in-out;
+    transition: bottom .8s ease-in-out;
 
     &__title {
         position: relative;
@@ -46,7 +46,7 @@
     font-size: 2rem;
     line-height: 10px;
     z-index: 10;
-    transition: bottom 1s ease-in-out;
+    transition: bottom .8s ease-in-out;
 
     div {
         display: flex;
