@@ -31,7 +31,13 @@ description: Welkom! Hier laat ik al mijn sideprojects zien die niet op mijn por
 
     // Controls
     const controls = new OrbitControls(camera, renderer.domElement);
-    controls.update();
+    controls.autoRotate = true;
+    controls.autoRotateSpeed = 1.0;
+    controls.minPolarAngle = 0;
+    controls.maxPolarAngle = Math.PI;
+    controls.enableRotate = true;
+    controls.minAzimuthAngle = -Infinity;
+    controls.maxAzimuthAngle = Infinity;
 
     // Set 2D elements
     const htmlRenderer = new CSS2DRenderer();
@@ -79,13 +85,14 @@ description: Welkom! Hier laat ik al mijn sideprojects zien die niet op mijn por
     scene.add(imageContainer);
 
     // Create 3D Elements
-    const geometry = new THREE.BoxGeometry( 3, 1, 1 );
-    const material = new THREE.MeshBasicMaterial( { color: "#00BF72" } );
-    const cube = new THREE.Mesh( geometry, material );
-    scene.add( cube );
+    const geometry = new THREE.SphereGeometry( 1.6, 18, 9 ); 
+    const material = new THREE.MeshBasicMaterial( { color: 0x00BF72, transparent: true, opacity: 0.7 } );
+    const sphere = new THREE.Mesh( geometry, material );
+    sphere.position.set(0, 0, 0);
+    scene.add( sphere );
 
-    const edges = new THREE.EdgesGeometry( geometry );
-    const line = new THREE.LineSegments(edges, new THREE.LineBasicMaterial( { color: 0xffffff } ) ); 
+    const edges = new THREE.EdgesGeometry( geometry ); 
+    const line = new THREE.LineSegments(edges, new THREE.LineBasicMaterial( { color: 0x000000 } ) ); 
     scene.add( line );
 
     camera.position.z = 5;
@@ -94,13 +101,10 @@ description: Welkom! Hier laat ik al mijn sideprojects zien die niet op mijn por
 
     // Render the scene and animate it
     function animate() {
-        // cube.rotation.x += 0.01;
-        // cube.rotation.y += 0.01;
-        // line.rotation.x += 0.01;
-        // line.rotation.y += 0.01;
         
 
-        htmlRenderer.render(scene, camera);
+        controls.update();
+        // htmlRenderer.render(scene, camera);
         renderer.render(scene, camera);
     }
     renderer.setAnimationLoop( animate );
