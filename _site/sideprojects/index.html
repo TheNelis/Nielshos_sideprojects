@@ -61,8 +61,11 @@
     controls.autoRotateSpeed = 1.0;
     controls.enablePan = false;
 
+    // Texture loader
+    const textureLoader = new THREE.TextureLoader();
+
     // Create 3D Elements
-    const sphereGeometry = new THREE.SphereGeometry( 1.6, 18, 9 ); 
+    const sphereGeometry = new THREE.SphereGeometry( 1.5, 18, 9 ); 
     const sphereMaterial = new THREE.MeshBasicMaterial( { color: 0x00BF72, transparent: true, opacity: 0.7 } );
     const projectSphere = new THREE.Mesh( sphereGeometry, sphereMaterial );
     projectSphere.position.set(0, 0, 0);
@@ -102,73 +105,167 @@
     let projects = [
         { 
             name: "Project 1", 
-            imageUrl: "url1.jpg", 
-            link: "https://voorbeeld1.nl", 
+            imageUrl: "https://fakeimg.pl/300x200", 
+            link: "https://voorbeeld1.nl",
             categories: "web, design" 
         },
         { 
             name: "Project 2", 
-            imageUrl: "url1.jpg", 
-            link: "https://voorbeeld1.nl", 
+            imageUrl: "https://fakeimg.pl/300x200", 
+            link: "https://voorbeeld1.nl",
             categories: "web, design" 
         },
         { 
             name: "Project 3", 
-            imageUrl: "url1.jpg", 
-            link: "https://voorbeeld1.nl", 
+            imageUrl: "https://fakeimg.pl/300x200", 
+            link: "https://voorbeeld1.nl",
             categories: "web, design" 
         },
         { 
             name: "Project 4", 
-            imageUrl: "url1.jpg", 
-            link: "https://voorbeeld1.nl", 
+            imageUrl: "https://fakeimg.pl/300x200", 
+            link: "https://voorbeeld1.nl",
             categories: "web, design" 
         },
         { 
             name: "Project 5", 
-            imageUrl: "url1.jpg", 
-            link: "https://voorbeeld1.nl", 
+            imageUrl: "https://fakeimg.pl/300x200", 
+            link: "https://voorbeeld1.nl",
             categories: "web, design" 
-        }
+        },
+        { 
+            name: "Project 1", 
+            imageUrl: "https://fakeimg.pl/300x200", 
+            link: "https://voorbeeld1.nl",
+            categories: "web, design" 
+        },
+        { 
+            name: "Project 2", 
+            imageUrl: "https://fakeimg.pl/300x200", 
+            link: "https://voorbeeld1.nl",
+            categories: "web, design" 
+        },
+        { 
+            name: "Project 3", 
+            imageUrl: "https://fakeimg.pl/300x200", 
+            link: "https://voorbeeld1.nl",
+            categories: "web, design" 
+        },
+        { 
+            name: "Project 4", 
+            imageUrl: "https://fakeimg.pl/300x200", 
+            link: "https://voorbeeld1.nl",
+            categories: "web, design" 
+        },
+        { 
+            name: "Project 5", 
+            imageUrl: "https://fakeimg.pl/300x200", 
+            link: "https://voorbeeld1.nl",
+            categories: "web, design" 
+        },
+        { 
+            name: "Project 1", 
+            imageUrl: "https://fakeimg.pl/300x200", 
+            link: "https://voorbeeld1.nl",
+            categories: "web, design" 
+        },
+        { 
+            name: "Project 2", 
+            imageUrl: "https://fakeimg.pl/300x200", 
+            link: "https://voorbeeld1.nl",
+            categories: "web, design" 
+        },
+        { 
+            name: "Project 3", 
+            imageUrl: "https://fakeimg.pl/300x200", 
+            link: "https://voorbeeld1.nl",
+            categories: "web, design" 
+        },
+        { 
+            name: "Project 4", 
+            imageUrl: "https://fakeimg.pl/300x200", 
+            link: "https://voorbeeld1.nl",
+            categories: "web, design" 
+        },
     ];
-    // Array om alle gemaakte projectbollen bij te houden
+
+
     let projectSpheres = [];
-    // Alle kruispunten van de bol
+    let interactiveObjects = [];
+
     const allVertices = getAllVertices(sphereGeometry);
 
 
-    // Functie om projectbollen te updaten op basis van de projects array
     function updateProjectSpheres() {
-
-        projectSpheres.forEach(sphere => {
-            scene.remove(sphere);
-        });
-        projectSpheres = [];
+    // Verwijder bestaande projectbollen en hun afbeeldingen
+    projectSpheres.forEach(sphere => {
+        if (sphere.userData.imageGroup) {
+            scene.remove(sphere.userData.imageGroup);
+        }
+        scene.remove(sphere);
+    });
+    
+    projectSpheres = [];
+    interactiveObjects = [];
+    
+    if (projects.length === 0) return;
+    
+    const step = Math.max(1, Math.floor(allVertices.length / projects.length));
+    
+    projects.forEach((project, index) => {
+        const vertexIndex = 1 + (index * step) % allVertices.length;
+        const position = allVertices[vertexIndex];
         
-        if (projects.length === 0) return;
-        
-        const step = Math.max(1, Math.floor(allVertices.length / projects.length));
-        
-        projects.forEach((project, index) => {
-
-            const vertexIndex = 1 + (index * step) % allVertices.length;
-            const position = allVertices[vertexIndex];
-            
-            const sphereGeometry = new THREE.SphereGeometry(0.05, 16, 16);
-            const sphereMaterial = new THREE.MeshBasicMaterial({ 
+        // Maak projectbol
+        const sphereGeometry = new THREE.SphereGeometry(0.01, 16, 16);
+        const sphereMaterial = new THREE.MeshBasicMaterial({ 
             color: 0xFF445C,
-            transparent: false 
+            transparent: true,
+            opacity: 0
+        });
+        
+        const sphere = new THREE.Mesh(sphereGeometry, sphereMaterial);
+        sphere.position.copy(position);
+        sphere.userData.projectIndex = index;
+        
+        scene.add(sphere);
+        projectSpheres.push(sphere);
+        interactiveObjects.push(sphere);
+        
+
+        const imageGroup = new THREE.Group();
+        sphere.userData.imageGroup = imageGroup;
+        
+        textureLoader.load(project.imageUrl, function(texture) {
+            const imageWidth = 1;
+            const imageHeight = 0.6;
+            
+            const planeGeometry = new THREE.PlaneGeometry(imageWidth, imageHeight);
+            const planeMaterial = new THREE.MeshBasicMaterial({ 
+                map: texture, 
+                transparent: true,
+                side: THREE.DoubleSide
             });
             
-            const sphere = new THREE.Mesh(sphereGeometry, sphereMaterial);
-            sphere.position.copy(position);
+            const imagePlane = new THREE.Mesh(planeGeometry, planeMaterial);
+            imagePlane.userData.isProjectImage = true;
+            imagePlane.userData.projectIndex = index;
             
-            sphere.userData.projectIndex = index;
+            const direction = position.clone().normalize();
+            const offset = 0.5;
+            imagePlane.position.copy(position).add(direction.multiplyScalar(offset));
             
-            scene.add(sphere);
-            projectSpheres.push(sphere);
+
+            // imagePlane.lookAt(0, 0, 0);
+            // imagePlane.rotateY(Math.PI);
+
+            imageGroup.add(imagePlane);
+            interactiveObjects.push(imagePlane);
         });
-    }
+        
+        scene.add(imageGroup);
+    });
+}
 
 
     const raycaster = new THREE.Raycaster();
@@ -178,10 +275,8 @@
         mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
         mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
         
-        // Update de raycaster
         raycaster.setFromCamera(mouse, camera);
         
-        // Controleer of we een projectbol raken
         const intersects = raycaster.intersectObjects(projectSpheres);
         
         if (intersects.length > 0) {
@@ -202,6 +297,11 @@
     // Render the scene and animate it
     function animate() {
         
+        interactiveObjects.forEach(object => {
+            if (object.userData.isProjectImage) {
+                object.lookAt(camera.position);
+            }
+        });
 
         controls.update();
         renderer.render(scene, camera);
