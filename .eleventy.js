@@ -12,6 +12,14 @@ module.exports = function(eleventyConfig) {
   eleventyConfig.addPassthroughCopy({
     "node_modules/three/examples/jsm/controls/OrbitControls.js": "js/OrbitControls.js"
   });
+
+  // Projects
+  eleventyConfig.addCollection('projects', function(collectionApi) {
+    return collectionApi.getFilteredByGlob('src/projects/**/*.html')
+      .sort(function(a, b) {
+        return new Date(b.data.date) - new Date(a.data.date);
+      });
+  });
   
 
   eleventyConfig.addWatchTarget("src/css/");
