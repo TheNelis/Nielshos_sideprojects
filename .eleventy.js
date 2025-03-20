@@ -12,6 +12,7 @@ module.exports = function(eleventyConfig) {
   eleventyConfig.addPassthroughCopy({
     "node_modules/three/examples/jsm/controls/OrbitControls.js": "js/OrbitControls.js"
   });
+  
 
   // Projects
   eleventyConfig.addCollection('projects', function(collectionApi) {

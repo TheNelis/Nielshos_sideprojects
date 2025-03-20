@@ -4,6 +4,11 @@ title: Niels Hos Sideprojects
 description: Welkom! Hier laat ik al mijn sideprojects zien die niet op mijn portfolio staan, maar wel een plekje verdienen!
 ---
 
+<div class="projectInfo" id="projectInfo-container">
+    <h1 class="projectInfo__title" id="projectTitle">Project Title</h1>
+    <h2 class="projectInfo__categories" id="projectCategories">Project Categories</h2>
+</div>
+<p class="dragtext">Drag to look around</p>
 <canvas class="webgl"></canvas>
 
 <script type="module">
@@ -51,15 +56,18 @@ description: Welkom! Hier laat ik al mijn sideprojects zien die niet op mijn por
     const textureLoader = new THREE.TextureLoader();
 
     // Create 3D Elements
-    const sphereGeometry = new THREE.SphereGeometry( 1.5, 18, 9 ); 
+    const sphereGeometry = new THREE.SphereGeometry( 1.2, 18, 9 ); 
     const sphereMaterial = new THREE.MeshBasicMaterial( { color: 0x00BF72, transparent: true, opacity: 0.7 } );
     const projectSphere = new THREE.Mesh( sphereGeometry, sphereMaterial );
     projectSphere.position.set(0, 0, 0);
-    scene.add( projectSphere );
+    // scene.add( projectSphere );
 
-    const edges = new THREE.EdgesGeometry( sphereGeometry ); 
-    const line = new THREE.LineSegments(edges, new THREE.LineBasicMaterial( { color: 0x000000 } ) ); 
-    scene.add( line );
+    const centerGeometry = new THREE.SphereGeometry( 0.5, 72, 36 ); 
+    const centerMaterial = new THREE.MeshBasicMaterial( { color: 0x00BF72, transparent: true, opacity: 1 } );
+    const center = new THREE.Mesh( centerGeometry, centerMaterial );
+    center.position.set(0, 0, 0);
+    scene.add( center );
+
 
 
     // Functie om alle kruispunten van de draadframe bol te vinden
@@ -136,8 +144,8 @@ description: Welkom! Hier laat ik al mijn sideprojects zien die niet op mijn por
             sphere.userData.imageGroup = imageGroup;
             
             textureLoader.load(project.imageUrl, function(texture) {
-                const imageWidth = 1;
-                const imageHeight = 1;
+                const imageWidth = 1.2;
+                const imageHeight = 1.2;
                 
                 const planeGeometry = new THREE.PlaneGeometry(imageWidth, imageHeight);
                 const planeMaterial = new THREE.MeshBasicMaterial({ 
@@ -151,7 +159,7 @@ description: Welkom! Hier laat ik al mijn sideprojects zien die niet op mijn por
                 imagePlane.userData.projectIndex = index;
                 
                 const direction = position.clone().normalize();
-                const offset = 0.6;
+                const offset = 0.7;
                 imagePlane.position.copy(position).add(direction.multiplyScalar(offset));
                 
 
@@ -239,21 +247,19 @@ description: Welkom! Hier laat ik al mijn sideprojects zien die niet op mijn por
     }
 
     function applyHoverEffect(object, isHovered) {
-        if (object.userData.projectIndex !== undefined && !object.userData.isProjectImage) {
-            if (isHovered) {
-                object.scale.set(1.5, 1.5, 1.5);
-            } else {
-                object.scale.set(1, 1, 1);
-            }
-        }
-        
+        const infoContainer = document.getElementById('projectInfo-container');
+        const titleElement = document.getElementById("projectTitle");
+        const categoriesElement = document.getElementById('projectCategories');
+
         if (object.userData.isProjectImage) {
             if (isHovered) {
-                object.material.color.set(0xFFFFFF);
                 object.scale.set(1.2, 1.2, 1.2);
+                titleElement.innerHTML = projects[object.userData.projectIndex].name;
+                categoriesElement.innerHTML = projects[object.userData.projectIndex].categories;
+                infoContainer.style.display = "block";
             } else {
-                object.material.color.set(0xFFFFFF);
                 object.scale.set(1, 1, 1);
+                infoContainer.style.display = "none";
             }
         }
     }
