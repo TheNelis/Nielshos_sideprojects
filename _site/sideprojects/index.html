@@ -46,35 +46,35 @@
             { 
                 name: "Little Guys Nikes", 
                 imageUrl: "/assets/projectImages/little_guys_sneakers/little_guys2.jpeg", 
-                link: "/",
+                link: "/projects/Little_Guys_sneakers/",
                 categories: "Custom sneakers" 
             },
         
             { 
                 name: "Blazin&#39; Luke Nikes", 
                 imageUrl: "/assets/projectImages/blazin_luke_sneakers/blazin_luke3.jpeg", 
-                link: "/",
+                link: "/projects/Blazin_Luke_sneakers/",
                 categories: "Custom sneakers" 
             },
         
             { 
                 name: "Slokkie", 
                 imageUrl: "/assets/projectImages/slokkie/Slokkie_mockup1.png", 
-                link: "/",
+                link: "/projects/Slokkie/",
                 categories: "Print / Illustration" 
             },
         
             { 
                 name: "Lekker &amp; Gezond", 
                 imageUrl: "/assets/projectImages/lekker_en_gezond/Poster_mockup.png", 
-                link: "/",
+                link: "/projects/Lekker_en_Gezond/",
                 categories: "Web / Print / Identity" 
             },
         
             { 
                 name: "Quoted", 
                 imageUrl: "/assets/projectImages/quoted/quoted_mockup_tablet.png", 
-                link: "/",
+                link: "/projects/Quoted/",
                 categories: "Webapp" 
             },
         
@@ -291,7 +291,7 @@
             if (projectIndex !== undefined) {
                 const clickedProject = projects[projectIndex];
                 console.log('Project aangeklikt:', clickedProject);
-                window.open(clickedProject.link, '_blank');
+                window.open(clickedProject.link, '_self');
             }
         }
         

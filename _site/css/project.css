@@ -1,0 +1,103 @@
+@font-face {
+  font-family: "Lilita One";
+  src: url(../assets/fonts/Lilita_One/LilitaOne-Regular.ttf) format("truetype");
+}
+@font-face {
+  font-family: "Poppins-LightItalic";
+  src: url(../assets/fonts/Poppins/Poppins-LightItalic.ttf) format("truetype");
+}
+@font-face {
+  font-family: "Poppins-Regular";
+  src: url(../assets/fonts/Poppins/Poppins-Regular.ttf) format("truetype");
+}
+@font-face {
+  font-family: "Poppins-Semibold";
+  src: url(../assets/fonts/Poppins/Poppins-SemiBold.ttf) format("truetype");
+}
+@font-face {
+  font-family: "Poppins-Bold";
+  src: url(../assets/fonts/Poppins/Poppins-Bold.ttf) format("truetype");
+}
+@font-face {
+  font-family: "Poppins-Black";
+  src: url(../assets/fonts/Poppins/Poppins-Black.ttf) format("truetype");
+}
+.lazy-load {
+  opacity: 0.5;
+  transform: scale(0.6);
+  transition: all 0.5s ease-out;
+}
+
+.lazy-load.loaded {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.slidercontainer {
+  display: flex;
+  padding: 120px 200px 40px 40px;
+  gap: 40px;
+}
+.slidercontainer__section {
+  display: inline-block;
+  min-width: calc(100vh - 120px - 40px - 150px);
+  height: calc(100vh - 120px - 40px);
+  font-size: 2rem;
+  object-fit: cover;
+  border-radius: 16px;
+}
+.slidercontainer__section--sm {
+  min-width: calc(100vh - 120px - 40px - 180px);
+}
+.slidercontainer__section--md {
+  min-width: calc(100vh - 120px - 40px);
+}
+.slidercontainer__section--lg {
+  min-width: calc(100vh - 120px - 40px + 180px);
+}
+.slidercontainer__section__first {
+  min-width: calc(100vw - 40px);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 60px;
+}
+.slidercontainer__section__first .image {
+  min-width: 45%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 16px;
+}
+.slidercontainer__section__first .textcontainer {
+  padding: 40px;
+  padding-right: 100px;
+  color: black;
+}
+.slidercontainer__section__first .textcontainer__categories {
+  font-family: "Poppins-LightItalic";
+  font-size: 1.25rem;
+}
+.slidercontainer__section__first .textcontainer__title {
+  font-family: "Lilita One";
+  font-size: 3rem;
+  text-transform: uppercase;
+  margin: 10px 0;
+}
+.slidercontainer__section__first .textcontainer__description {
+  font-family: "Poppins-Regular";
+  font-size: 1.125rem;
+  margin-bottom: 20px;
+}
+.slidercontainer__section__first .textcontainer__link {
+  font-family: "Poppins-Semibold";
+  font-size: 1.125rem;
+  text-transform: uppercase;
+  padding: 5px 15px;
+  border-radius: 32px;
+  border: 1px solid black;
+  text-decoration: none;
+  color: black;
+}
+.slidercontainer__section:last-child {
+  min-width: 15px;
+}

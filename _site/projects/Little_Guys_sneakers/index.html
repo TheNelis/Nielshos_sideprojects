@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="De Little Guys Nikes zijn de eerste custom sneakers die ik ooit gemaakt heb! De naam spreekt voor zichzelf; het ontwerp bestaat uit allerlei kleine doodle dieren die de vlakken van de Nikes opvullen. Als kleur heb ik gekozen voor oranje, omdat ik dit zelf een mooie kleur vindt en dit levendig overkomt.">
+
+<link rel="shortcut icon" href="/assets/favicon.ico" type="image/x-icon">
+<link rel="stylesheet" href="/css/all-styles.css">
+
+<script type="importmap">
+    {
+        "imports": {
+            "three": "/js/three/three.module.js"
+        }
+    }
+</script>
+
+<title>Niels Hos Sideprojects</title>
+</head>
+<body>
+    <nav class="navcontainer">
+        <a href="/"><img class="navcontainer__logo" src="/assets/niels_logo_black.png" alt=""></a>
+        <div class="navcontainer__titlecontainer no-select">
+            <p id="title1" class="navcontainer__titlecontainer__title">Fullstack-Developer</p>
+            <p id="title2" class="navcontainer__titlecontainer__title">UX/UI Designer</p>
+            <p id="title3" class="navcontainer__titlecontainer__title">Graphic Designer</p>
+        </div>
+    </nav>
+
+    
+<div class="slidercontainer">
+    <div class="slidercontainer__section slidercontainer__section__first">
+        <img class="image" src="/assets/projectImages/little_guys_sneakers/little_guys2.jpeg" alt="">
+        <div class="textcontainer">
+            <p class="textcontainer__categories">Custom sneakers</p>
+            <h1 class="textcontainer__title">Little Guys Nikes</h1>
+            <p class="textcontainer__description">De Little Guys Nikes zijn de eerste custom sneakers die ik ooit gemaakt heb! De naam spreekt voor zichzelf; het ontwerp bestaat uit allerlei kleine doodle dieren die de vlakken van de Nikes opvullen. Als kleur heb ik gekozen voor oranje, omdat ik dit zelf een mooie kleur vindt en dit levendig overkomt.</p>
+
+            
+        </div>
+    </div>
+    
+<img class="slidercontainer__section--md slidercontainer__section lazy-load" data-src="/assets/projectImages/little_guys_sneakers/little_guys1.jpeg" alt="">
+<img class="slidercontainer__section--md slidercontainer__section lazy-load" data-src="/assets/projectImages/little_guys_sneakers/little_guys2.jpeg" alt="">
+<img class="slidercontainer__section--md slidercontainer__section lazy-load" data-src="/assets/projectImages/little_guys_sneakers/little_guys3.jpeg" alt="">
+    <div class="slidercontainer__section"></div>
+</div>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+
+<script>
+    gsap.registerPlugin(ScrollTrigger);
+
+    let slider = document.querySelector(".slidercontainer");
+
+    gsap.to(slider, {
+        x: () => -(slider.scrollWidth - window.innerWidth) + "px",
+        ease: "none",
+        scrollTrigger: {
+            trigger: slider,
+            start: "top top",
+            end: () => "+=" + (slider.scrollWidth - window.innerWidth),
+            scrub: 1,
+            pin: true
+        }
+    });
+
+
+    const lazyImages = document.querySelectorAll('.lazy-load');
+
+
+    const observer = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            const image = entry.target;
+
+            if (entry.isIntersecting) {
+
+                image.src = image.dataset.src;
+
+                image.classList.add('loaded');
+            }
+        });
+    }, {
+        root: null,
+        rootMargin: '0px',
+        threshold: 0.1 // 10% van de afbeelding moet in beeld zijn om de actie te triggeren
+    });
+
+
+    lazyImages.forEach(image => {
+        observer.observe(image);
+    });
+
+</script>
+    
+    <div class="noise"></div>
+</body>
+</html>
+
+<script>
+    const titles = [
+        document.getElementById('title3'),
+        document.getElementById('title2'),
+        document.getElementById('title1')
+    ];
+
+    // Set initial styles
+    titles[0].style.opacity = 0;
+    titles[0].style.marginRight = '60px';
+    titles[1].style.opacity = 0;
+    titles[1].style.marginRight = '60px';
+    titles[2].style.opacity = 0;
+    titles[2].style.marginRight = '60px';
+
+    // Change styles animation
+    document.addEventListener("DOMContentLoaded", (event) => {
+        let counter = 0;
+        let i = setInterval(function(){
+            titles[counter].style.opacity = 1;
+            titles[counter].style.marginRight = '0px';
+
+            counter++;
+            if(counter === 3) {
+                clearInterval(i);
+            }
+        }, 300);
+    });
+</script>

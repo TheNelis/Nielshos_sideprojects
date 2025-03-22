@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Welkom! Hier laat ik al mijn sideprojects zien die niet op mijn portfolio staan, maar wel een plekje verdienen!">
+
+<link rel="shortcut icon" href="/assets/favicon.ico" type="image/x-icon">
+<link rel="stylesheet" href="/css/all-styles.css">
+
+<script type="importmap">
+    {
+        "imports": {
+            "three": "/js/three/three.module.js"
+        }
+    }
+</script>
+
+<title>Niels Hos Sideprojects</title>
+</head>
+<body>
+    <nav class="navcontainer">
+        <a href="/"><img class="navcontainer__logo" src="/assets/niels_logo_black.png" alt=""></a>
+        <div class="navcontainer__titlecontainer no-select">
+            <p id="title1" class="navcontainer__titlecontainer__title">Fullstack-Developer</p>
+            <p id="title2" class="navcontainer__titlecontainer__title">UX/UI Designer</p>
+            <p id="title3" class="navcontainer__titlecontainer__title">Graphic Designer</p>
+        </div>
+    </nav>
+
+    
+
+
+    
+    <div class="noise"></div>
+</body>
+</html>
+
+<script>
+    const titles = [
+        document.getElementById('title3'),
+        document.getElementById('title2'),
+        document.getElementById('title1')
+    ];
+
+    // Set initial styles
+    titles[0].style.opacity = 0;
+    titles[0].style.marginRight = '60px';
+    titles[1].style.opacity = 0;
+    titles[1].style.marginRight = '60px';
+    titles[2].style.opacity = 0;
+    titles[2].style.marginRight = '60px';
+
+    // Change styles animation
+    document.addEventListener("DOMContentLoaded", (event) => {
+        let counter = 0;
+        let i = setInterval(function(){
+            titles[counter].style.opacity = 1;
+            titles[counter].style.marginRight = '0px';
+
+            counter++;
+            if(counter === 3) {
+                clearInterval(i);
+            }
+        }, 300);
+    });
+</script>

@@ -1,0 +1,97 @@
+@use "./variables.scss" as v;
+
+
+.lazy-load {
+    opacity: 0.5;
+    transform: scale(0.6);
+    transition: all 0.5s ease-out;
+}
+.lazy-load.loaded {
+    opacity: 1;
+    transform: scale(1);
+}
+
+.slidercontainer {
+    display: flex;
+    padding: 120px 200px v.$margin-desktop v.$margin-desktop;
+    gap: 40px;
+
+    &__section {
+        display: inline-block;
+        min-width: calc(100vh - 120px - v.$margin-desktop - 150px);
+        height: calc(100vh - 120px - v.$margin-desktop);
+        font-size: 2rem;
+        object-fit: cover;
+        border-radius: 16px;
+
+        &--sm {
+            min-width: calc(100vh - 120px - v.$margin-desktop - 180px);
+        }
+
+        &--md {
+            min-width: calc(100vh - 120px - v.$margin-desktop);
+        }
+
+        &--lg {
+            min-width: calc(100vh - 120px - v.$margin-desktop + 180px);
+        }
+        
+        &__first {
+            min-width: calc(100vw - v.$margin-desktop);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 60px;
+
+            .image {
+                min-width: 45%;
+                height: 100%;
+                object-fit: cover;
+                border-radius: 16px;
+            }
+
+            .textcontainer {
+                padding: v.$margin-desktop;
+                padding-right: 100px;
+                color: black;
+
+                &__categories {
+                    font-family: 'Poppins-LightItalic';
+                    font-size: 1.25rem;
+                }
+
+                &__title {
+                    font-family: 'Lilita One';
+                    font-size: 3rem;
+                    text-transform: uppercase;
+                    margin: 10px 0;
+                }
+
+                &__description {
+                    font-family: 'Poppins-Regular';
+                    font-size: 1.125rem;
+                    margin-bottom: 20px;
+                }
+
+                &__link {
+                    font-family: 'Poppins-Semibold';
+                    font-size: 1.125rem;
+                    text-transform: uppercase;
+
+                    padding: 5px 15px;
+                    border-radius: 32px;
+                    border: 1px solid black;
+
+                    text-decoration: none;
+                    color: black;
+                }
+            }
+        }
+
+        &:last-child {
+            min-width: 15px;
+        }
+    }
+}
+
+

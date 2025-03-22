@@ -21,7 +21,7 @@ description: Welkom! Hier laat ik al mijn sideprojects zien die niet op mijn por
             { 
                 name: "{{ project.data.name }}", 
                 imageUrl: "{{ project.data.imageUrl }}", 
-                link: "{{ project.data.link }}",
+                link: "{{ project.url }}",
                 categories: "{{ project.data.categories }}" 
             },
         {% endfor %}
@@ -238,7 +238,7 @@ description: Welkom! Hier laat ik al mijn sideprojects zien die niet op mijn por
             if (projectIndex !== undefined) {
                 const clickedProject = projects[projectIndex];
                 console.log('Project aangeklikt:', clickedProject);
-                window.open(clickedProject.link, '_blank');
+                window.open(clickedProject.link, '_self');
             }
         }
         

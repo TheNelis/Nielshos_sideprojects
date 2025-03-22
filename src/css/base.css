@@ -3,6 +3,10 @@
   src: url(../assets/fonts/Lilita_One/LilitaOne-Regular.ttf) format("truetype");
 }
 @font-face {
+  font-family: "Poppins-LightItalic";
+  src: url(../assets/fonts/Poppins/Poppins-LightItalic.ttf) format("truetype");
+}
+@font-face {
   font-family: "Poppins-Regular";
   src: url(../assets/fonts/Poppins/Poppins-Regular.ttf) format("truetype");
 }
@@ -25,12 +29,12 @@
 html {
   font-family: "Poppins-Regular", Arial, Helvetica, sans-serif;
   font-size: 16px;
-  overflow: hidden;
+  overflow-x: hidden;
 }
 
 body {
   background-color: #FFDC2D;
-  overflow: hidden;
+  overflow-x: hidden;
 }
 
 .maincontainer {

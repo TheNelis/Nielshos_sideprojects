@@ -1,0 +1,71 @@
+---
+layout: layouts/base.html
+title: Niels Hos Sideprojects
+description: Welkom! Hier laat ik al mijn sideprojects zien die niet op mijn portfolio staan, maar wel een plekje verdienen!
+---
+
+<div class="slidercontainer">
+    <div class="slidercontainer__section slidercontainer__section__first">
+        <img class="image" src="{{ imageUrl }}" alt="">
+        <div class="textcontainer">
+            <p class="textcontainer__categories">{{ categories }}</p>
+            <h1 class="textcontainer__title">{{ name }}</h1>
+            <p class="textcontainer__description">{{ description }}</p>
+
+            {% if link %}
+            <a href="{{ link }}" target="_blank" class="textcontainer__link">Bekijk website</a>
+            {% endif %}
+        </div>
+    </div>
+    {{ content | safe }}
+    <div class="slidercontainer__section"></div>
+</div>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+
+<script>
+    gsap.registerPlugin(ScrollTrigger);
+
+    let slider = document.querySelector(".slidercontainer");
+
+    gsap.to(slider, {
+        x: () => -(slider.scrollWidth - window.innerWidth) + "px",
+        ease: "none",
+        scrollTrigger: {
+            trigger: slider,
+            start: "top top",
+            end: () => "+=" + (slider.scrollWidth - window.innerWidth),
+            scrub: 1,
+            pin: true
+        }
+    });
+
+
+    const lazyImages = document.querySelectorAll('.lazy-load');
+
+
+    const observer = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            const image = entry.target;
+
+            if (entry.isIntersecting) {
+
+                image.src = image.dataset.src;
+
+                image.classList.add('loaded');
+            }
+        });
+    }, {
+        root: null,
+        rootMargin: '0px',
+        threshold: 0.1 // 10% van de afbeelding moet in beeld zijn om de actie te triggeren
+    });
+
+
+    lazyImages.forEach(image => {
+        observer.observe(image);
+    });
+
+</script>
