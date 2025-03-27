@@ -35,33 +35,52 @@
 
 .slidercontainer {
   display: flex;
-  padding: 120px 200px 40px 40px;
-  gap: 40px;
+  flex-direction: column;
+  padding: 120px 15px 0 15px;
+  gap: 20px;
+}
+@media only screen and (min-width: 992px) {
+  .slidercontainer {
+    flex-direction: row;
+    padding: 120px 200px 40px 40px;
+    gap: 40px;
+  }
 }
 .slidercontainer__section {
   position: relative;
   display: inline-block;
-  min-width: calc(100vh - 120px - 40px - 150px);
-  height: calc(100vh - 120px - 40px);
   font-size: 2rem;
   object-fit: cover;
   border-radius: 16px;
 }
-.slidercontainer__section--sm {
-  min-width: calc(100vh - 120px - 40px - 180px);
-}
-.slidercontainer__section--md {
-  min-width: calc(100vh - 120px - 40px);
-}
-.slidercontainer__section--lg {
-  min-width: calc(100vh - 120px - 40px + 180px);
+@media only screen and (min-width: 992px) {
+  .slidercontainer__section {
+    min-width: calc(100vh - 120px - 40px - 150px);
+    height: calc(100vh - 120px - 40px);
+  }
+  .slidercontainer__section--sm {
+    min-width: calc(100vh - 120px - 40px - 180px);
+  }
+  .slidercontainer__section--md {
+    min-width: calc(100vh - 120px - 40px);
+  }
+  .slidercontainer__section--lg {
+    min-width: calc(100vh - 120px - 40px + 180px);
+  }
 }
 .slidercontainer__section__first {
   min-width: calc(100vw - 40px);
   display: flex;
+  flex-direction: column-reverse;
   align-items: center;
   justify-content: space-between;
-  gap: 60px;
+  gap: 10px;
+}
+@media only screen and (min-width: 992px) {
+  .slidercontainer__section__first {
+    flex-direction: row;
+    gap: 60px;
+  }
 }
 .slidercontainer__section__first .image {
   min-width: 45%;
@@ -70,9 +89,15 @@
   border-radius: 16px;
 }
 .slidercontainer__section__first .textcontainer {
-  padding: 40px;
-  padding-right: 100px;
   color: black;
+  margin-top: 60px;
+}
+@media only screen and (min-width: 992px) {
+  .slidercontainer__section__first .textcontainer {
+    padding: 40px;
+    padding-right: 100px;
+    margin-top: 0;
+  }
 }
 .slidercontainer__section__first .textcontainer__categories {
   font-family: "Poppins-LightItalic";
@@ -121,8 +146,8 @@
   }
 }
 .backbutton p {
-  font-family: "Poppins-LightItalic";
-  font-size: 1.125rem;
+  font-family: "Poppins-Light";
+  font-size: 1.25rem;
   margin-left: 35px;
 }
 @media only screen and (min-width: 992px) {

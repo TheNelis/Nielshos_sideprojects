@@ -8,18 +8,26 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 15px v.$margin-desktop;
+    padding: 15px v.$margin-mobile;
     font-family: 'Poppins-Semibold';
     font-size: 1.25rem;
     z-index: 1000;
+
+    @media only screen and (min-width:v.$lg){
+        padding: 15px v.$margin-desktop;
+    }
 
     &__logo {
         width: 65px;
     }
 
     &__titlecontainer {
-        display: flex;
+        display: none;
         gap: 5px;
+
+        @media only screen and (min-width:v.$lg){
+            display: flex;
+        }
 
         &__title {
             background-color: v.$red;
@@ -27,9 +35,11 @@
             text-transform: uppercase;
             padding: 2px 15px;
             border-radius: 20px;
-            transition: all .5s ease-in-out;
+            transition: margin .5s ease-in-out, transform .2s ease-in-out;
             margin-right: 60px;
             opacity: 0;
+            text-decoration: none;
+            color: black;
 
             &:first-child {
                 background-color: v.$green;
@@ -37,6 +47,10 @@
 
             &:last-child {
                 background-color: v.$blue;
+            }
+
+            &:hover {
+                transform: scale(1.1);
             }
         }
     }

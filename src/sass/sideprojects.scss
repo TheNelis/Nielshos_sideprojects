@@ -8,14 +8,11 @@
     transform: translateX(-50%);
     z-index: 9999;
     pointer-events: none;
+    width: max-content;
 
     font-family: 'Poppins-Semibold';
     font-size: 1rem;
     text-transform: uppercase;
-
-    padding: 5px 15px;
-    border-radius: 32px;
-    border: 1px solid black;
 }
 
 .projectInfo {

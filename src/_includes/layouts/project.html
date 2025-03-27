@@ -32,19 +32,23 @@ description: Welkom! Hier laat ik al mijn sideprojects zien die niet op mijn por
 <script>
     gsap.registerPlugin(ScrollTrigger);
 
+    let containerWidth = window.innerWidth;
     let slider = document.querySelector(".slidercontainer");
 
-    gsap.to(slider, {
-        x: () => -(slider.scrollWidth - window.innerWidth) + "px",
-        ease: "none",
-        scrollTrigger: {
-            trigger: slider,
-            start: "top top",
-            end: () => "+=" + (slider.scrollWidth - window.innerWidth),
-            scrub: 1,
-            pin: true
-        }
-    });
+    if (containerWidth >= 992) {
+        gsap.to(slider, {
+            x: () => -(slider.scrollWidth - window.innerWidth) + "px",
+            ease: "none",
+            scrollTrigger: {
+                trigger: slider,
+                start: "top top",
+                end: () => "+=" + (slider.scrollWidth - window.innerWidth),
+                scrub: 1,
+                pin: true
+            }
+        });
+    }
+    
 
 
     const lazyImages = document.querySelectorAll('.lazy-load');

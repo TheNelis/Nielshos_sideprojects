@@ -22,14 +22,14 @@
     <nav class="navcontainer">
         <a href="/"><img class="navcontainer__logo" src="/assets/niels_logo_black.png" alt=""></a>
         <div class="navcontainer__titlecontainer no-select">
-            <p id="title1" class="navcontainer__titlecontainer__title">Fullstack-Developer</p>
-            <p id="title2" class="navcontainer__titlecontainer__title">UX/UI Designer</p>
-            <p id="title3" class="navcontainer__titlecontainer__title">Graphic Designer</p>
+            <a href="https://en.wikipedia.org/wiki/Web_development" target="_blank" id="title1" class="navcontainer__titlecontainer__title">Fullstack-Developer</a>
+            <a href="https://en.wikipedia.org/wiki/User_experience_design" target="_blank" id="title2" class="navcontainer__titlecontainer__title">UX/UI Designer</a>
+            <a href="https://en.wikipedia.org/wiki/Graphic_designer" target="_blank" id="title3" class="navcontainer__titlecontainer__title">Graphic Designer</a>
         </div>
     </nav>
 
     
-<div>
+<div class="no-overflow">
     <a href="/sideprojects" id="circle-container" class="circlecontainer no-select">
         <div class="circlecontainer__imagecontainer">
             <img src="/assets/images/portretfoto_niels.jpeg" alt="" class="circlecontainer__imagecontainer__portret">
@@ -55,6 +55,8 @@
 
 
 <script>
+    const containerWidth = window.innerWidth;
+
     const circle = document.getElementById('circle-container');
     const headerContainer = document.getElementById('headerContainer');
     const socials = document.getElementById('socials');
@@ -91,22 +93,34 @@
     }
 
     window.addEventListener("mousemove", (event) => {
-        // Update alleen de doelpositie
-        targetX = event.clientX;
-        targetY = event.clientY;
+        if (containerWidth >= 992) {
+            targetX = event.clientX;
+            targetY = event.clientY;
+        }
     });
 
-    // Start de update loop
-    updatePosition();
+    if (containerWidth >= 992) {
+        updatePosition();
+    }
 
     // Set initial styles
-    headerContainer.style.bottom = '-50%';
-    socials.style.bottom = '-50%';
+    if (containerWidth >= 992) {
+        headerContainer.style.bottom = '-50%';
+        socials.style.bottom = '-50%';
+    } else {
+        headerContainer.style.bottom = '-50%';
+        socials.style.right = '-50%';
+    }
 
 
     document.addEventListener("DOMContentLoaded", (event) => {
-        headerContainer.style.bottom = '0';
-        socials.style.bottom = '20px';
+        if (containerWidth >= 992) {
+            headerContainer.style.bottom = '0';
+            socials.style.bottom = '20px';
+        } else {
+            headerContainer.style.bottom = '10px';
+            socials.style.right = '20px';
+        }
     });
 </script>
     

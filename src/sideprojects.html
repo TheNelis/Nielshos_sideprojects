@@ -8,7 +8,7 @@ description: Welkom! Hier laat ik al mijn sideprojects zien die niet op mijn por
     <h1 class="projectInfo__title" id="projectTitle">Project Title</h1>
     <h2 class="projectInfo__categories" id="projectCategories">Project Categories</h2>
 </div>
-<p class="dragtext">Drag to look around</p>
+<p class="dragtext">- Drag to look around -</p>
 <canvas class="webgl"></canvas>
 
 <script type="module">
@@ -27,6 +27,7 @@ description: Welkom! Hier laat ik al mijn sideprojects zien die niet op mijn por
         {% endfor %}
     ];
 
+    let containerWidth = window.innerWidth;
 
     let sizes = {
         width: window.innerWidth,
@@ -37,7 +38,14 @@ description: Welkom! Hier laat ik al mijn sideprojects zien die niet op mijn por
     const scene = new THREE.Scene();
     scene.background = new THREE.Color("#FFDC2D");
     const camera = new THREE.PerspectiveCamera(50, sizes.width / sizes.height, 0.1, 1000 );
-    camera.position.set(0, 3, 5.5);
+
+    if (containerWidth >= 992) {
+        camera.position.set(0, 3, 5.5);
+    } else if (containerWidth >= 768 && containerWidth < 992){
+        camera.position.set(0, 3, 7);
+    } else {
+        camera.position.set(0, 3, 8);
+    }
 
     // Set renderer and mount
     const renderer = new THREE.WebGLRenderer({ antialias: true });
@@ -67,6 +75,12 @@ description: Welkom! Hier laat ik al mijn sideprojects zien die niet op mijn por
     const center = new THREE.Mesh( centerGeometry, centerMaterial );
     center.position.set(0, 0, 0);
     scene.add( center );
+
+    const wireframeGeometry = new THREE.SphereGeometry( 0.6, 18, 9 ); 
+    const edges = new THREE.EdgesGeometry(wireframeGeometry);
+    const lineMaterial = new THREE.LineBasicMaterial({ color: 0x000000, transparent: true, opacity: 0.7 }); // Zwarte lijnen
+    const wireframe = new THREE.LineSegments(edges, lineMaterial);
+    scene.add(wireframe);
 
 
 
@@ -153,6 +167,9 @@ description: Welkom! Hier laat ik al mijn sideprojects zien die niet op mijn por
                     transparent: true,
                     side: THREE.DoubleSide
                 });
+
+                texture.colorSpace = THREE.SRGBColorSpace;
+                texture.encoding = THREE.sRGBEncoding;
                 
                 const imagePlane = new THREE.Mesh(planeGeometry, planeMaterial);
                 imagePlane.userData.isProjectImage = true;

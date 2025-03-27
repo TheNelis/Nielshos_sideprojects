@@ -4,7 +4,7 @@ title: Niels Hos Sideprojects
 description: Welkom! Hier laat ik al mijn sideprojects zien die niet op mijn portfolio staan, maar wel een plekje verdienen!
 ---
 
-<div>
+<div class="no-overflow">
     <a href="/sideprojects" id="circle-container" class="circlecontainer no-select">
         <div class="circlecontainer__imagecontainer">
             <img src="/assets/images/portretfoto_niels.jpeg" alt="" class="circlecontainer__imagecontainer__portret">
@@ -30,6 +30,8 @@ description: Welkom! Hier laat ik al mijn sideprojects zien die niet op mijn por
 
 
 <script>
+    const containerWidth = window.innerWidth;
+
     const circle = document.getElementById('circle-container');
     const headerContainer = document.getElementById('headerContainer');
     const socials = document.getElementById('socials');
@@ -66,21 +68,33 @@ description: Welkom! Hier laat ik al mijn sideprojects zien die niet op mijn por
     }
 
     window.addEventListener("mousemove", (event) => {
-        // Update alleen de doelpositie
-        targetX = event.clientX;
-        targetY = event.clientY;
+        if (containerWidth >= 992) {
+            targetX = event.clientX;
+            targetY = event.clientY;
+        }
     });
 
-    // Start de update loop
-    updatePosition();
+    if (containerWidth >= 992) {
+        updatePosition();
+    }
 
     // Set initial styles
-    headerContainer.style.bottom = '-50%';
-    socials.style.bottom = '-50%';
+    if (containerWidth >= 992) {
+        headerContainer.style.bottom = '-50%';
+        socials.style.bottom = '-50%';
+    } else {
+        headerContainer.style.bottom = '-50%';
+        socials.style.right = '-50%';
+    }
 
 
     document.addEventListener("DOMContentLoaded", (event) => {
-        headerContainer.style.bottom = '0';
-        socials.style.bottom = '20px';
+        if (containerWidth >= 992) {
+            headerContainer.style.bottom = '0';
+            socials.style.bottom = '20px';
+        } else {
+            headerContainer.style.bottom = '10px';
+            socials.style.right = '20px';
+        }
     });
 </script>

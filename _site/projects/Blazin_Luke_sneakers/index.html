@@ -22,9 +22,9 @@
     <nav class="navcontainer">
         <a href="/"><img class="navcontainer__logo" src="/assets/niels_logo_black.png" alt=""></a>
         <div class="navcontainer__titlecontainer no-select">
-            <p id="title1" class="navcontainer__titlecontainer__title">Fullstack-Developer</p>
-            <p id="title2" class="navcontainer__titlecontainer__title">UX/UI Designer</p>
-            <p id="title3" class="navcontainer__titlecontainer__title">Graphic Designer</p>
+            <a href="https://en.wikipedia.org/wiki/Web_development" target="_blank" id="title1" class="navcontainer__titlecontainer__title">Fullstack-Developer</a>
+            <a href="https://en.wikipedia.org/wiki/User_experience_design" target="_blank" id="title2" class="navcontainer__titlecontainer__title">UX/UI Designer</a>
+            <a href="https://en.wikipedia.org/wiki/Graphic_designer" target="_blank" id="title3" class="navcontainer__titlecontainer__title">Graphic Designer</a>
         </div>
     </nav>
 
@@ -63,19 +63,23 @@
 <script>
     gsap.registerPlugin(ScrollTrigger);
 
+    let containerWidth = window.innerWidth;
     let slider = document.querySelector(".slidercontainer");
 
-    gsap.to(slider, {
-        x: () => -(slider.scrollWidth - window.innerWidth) + "px",
-        ease: "none",
-        scrollTrigger: {
-            trigger: slider,
-            start: "top top",
-            end: () => "+=" + (slider.scrollWidth - window.innerWidth),
-            scrub: 1,
-            pin: true
-        }
-    });
+    if (containerWidth >= 992) {
+        gsap.to(slider, {
+            x: () => -(slider.scrollWidth - window.innerWidth) + "px",
+            ease: "none",
+            scrollTrigger: {
+                trigger: slider,
+                start: "top top",
+                end: () => "+=" + (slider.scrollWidth - window.innerWidth),
+                scrub: 1,
+                pin: true
+            }
+        });
+    }
+    
 
 
     const lazyImages = document.querySelectorAll('.lazy-load');

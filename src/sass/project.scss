@@ -13,36 +13,50 @@
 
 .slidercontainer {
     display: flex;
-    padding: 120px 200px v.$margin-desktop v.$margin-desktop;
-    gap: 40px;
+    flex-direction: column;
+    padding: 120px v.$margin-mobile 0 v.$margin-mobile;
+    gap: 20px;
+
+    @media only screen and (min-width:v.$lg){
+        flex-direction: row;
+        padding: 120px 200px v.$margin-desktop v.$margin-desktop;
+        gap: 40px;
+    }
 
     &__section {
         position: relative;
         display: inline-block;
-        min-width: calc(100vh - 120px - v.$margin-desktop - 150px);
-        height: calc(100vh - 120px - v.$margin-desktop);
         font-size: 2rem;
         object-fit: cover;
         border-radius: 16px;
 
-        &--sm {
-            min-width: calc(100vh - 120px - v.$margin-desktop - 180px);
-        }
+        @media only screen and (min-width:v.$lg){
+            min-width: calc(100vh - 120px - v.$margin-desktop - 150px);
+            height: calc(100vh - 120px - v.$margin-desktop);
 
-        &--md {
-            min-width: calc(100vh - 120px - v.$margin-desktop);
-        }
-
-        &--lg {
-            min-width: calc(100vh - 120px - v.$margin-desktop + 180px);
+            &--sm {
+                min-width: calc(100vh - 120px - v.$margin-desktop - 180px);
+            }
+            &--md {
+                min-width: calc(100vh - 120px - v.$margin-desktop);
+            }
+            &--lg {
+                min-width: calc(100vh - 120px - v.$margin-desktop + 180px);
+            }
         }
         
         &__first {
             min-width: calc(100vw - v.$margin-desktop);
             display: flex;
+            flex-direction: column-reverse;
             align-items: center;
             justify-content: space-between;
-            gap: 60px;
+            gap: 10px;
+
+            @media only screen and (min-width:v.$lg){
+                flex-direction: row;
+                gap: 60px;
+            }
 
             .image {
                 min-width: 45%;
@@ -52,9 +66,14 @@
             }
 
             .textcontainer {
-                padding: v.$margin-desktop;
-                padding-right: 100px;
                 color: black;
+                margin-top: 60px;
+
+                @media only screen and (min-width:v.$lg){
+                    padding: v.$margin-desktop;
+                    padding-right: 100px;
+                    margin-top: 0;
+                }
 
                 &__categories {
                     font-family: 'Poppins-LightItalic';
@@ -113,8 +132,8 @@
     }
 
     p {
-        font-family: 'Poppins-LightItalic';
-        font-size: 1.125rem;
+        font-family: 'Poppins-Light';
+        font-size: 1.25rem;
         margin-left: 35px;
 
         @media only screen and (min-width: v.$lg) {
