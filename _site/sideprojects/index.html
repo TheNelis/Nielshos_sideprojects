@@ -256,14 +256,27 @@
     const dragThreshold = 5; // pixels
     let mouseDownPos = { x: 0, y: 0 };
 
-    function onMouseDown(event) {
-        mouseDownPos.x = event.clientX;
-        mouseDownPos.y = event.clientY;
+    // 🔹 Ondersteuning voor touch en muis
+    function getMousePos(event) {
+        let x, y;
+        if (event.touches) { // Touchscreen
+            x = event.touches[0].clientX;
+            y = event.touches[0].clientY;
+        } else { // Muis
+            x = event.clientX;
+            y = event.clientY;
+        }
+        return { x, y };
+    }
+
+    function onPointerDown(event) {
+        const pos = getMousePos(event);
+        mouseDownPos.x = pos.x;
+        mouseDownPos.y = pos.y;
         isDragging = false;
         
-        // Controleer of we op een object klikken
-        mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
-        mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
+        mouse.x = (pos.x / window.innerWidth) * 2 - 1;
+        mouse.y = -(pos.y / window.innerHeight) * 2 + 1;
         
         raycaster.setFromCamera(mouse, camera);
         const intersects = raycaster.intersectObjects(interactiveObjects);
@@ -271,10 +284,10 @@
         mouseDownObject = intersects.length > 0 ? intersects[0].object : null;
     }
 
-    function onMouseMove(event) {
-        // Bestaande hover code behouden
-        mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
-        mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
+    function onPointerMove(event) {
+        const pos = getMousePos(event);
+        mouse.x = (pos.x / window.innerWidth) * 2 - 1;
+        mouse.y = -(pos.y / window.innerHeight) * 2 + 1;
         
         raycaster.setFromCamera(mouse, camera);
         const intersects = raycaster.intersectObjects(interactiveObjects);
@@ -293,22 +306,20 @@
             applyHoverEffect(object, true);
             hoveredObject = object;
         }
-        
-        // Controleer of we slepen
+
+        // Check of er wordt gesleept
         if (mouseDownObject) {
-            const dx = Math.abs(event.clientX - mouseDownPos.x);
-            const dy = Math.abs(event.clientY - mouseDownPos.y);
+            const dx = Math.abs(pos.x - mouseDownPos.x);
+            const dy = Math.abs(pos.y - mouseDownPos.y);
             
-            // Als we meer dan de drempelwaarde bewegen, beschouwen we het als slepen
             if (dx > dragThreshold || dy > dragThreshold) {
                 isDragging = true;
             }
         }
     }
 
-    function onMouseUp(event) {
+    function onPointerUp(event) {
         if (mouseDownObject && !isDragging) {
-            // Dit is een echte klik (geen sleep)
             const projectIndex = mouseDownObject.userData.projectIndex;
             if (projectIndex !== undefined) {
                 const clickedProject = projects[projectIndex];
@@ -321,31 +332,17 @@
         isDragging = false;
     }
 
-    function applyHoverEffect(object, isHovered) {
-        const infoContainer = document.getElementById('projectInfo-container');
-        const titleElement = document.getElementById("projectTitle");
-        const categoriesElement = document.getElementById('projectCategories');
+    // 🔹 Voeg zowel muis- als touch-events toe
+    window.addEventListener('mousedown', onPointerDown);
+    window.addEventListener('mousemove', onPointerMove);
+    window.addEventListener('mouseup', onPointerUp);
 
-        if (object.userData.isProjectImage) {
-            if (isHovered) {
-                object.scale.set(1.2, 1.2, 1.2);
-                titleElement.innerHTML = projects[object.userData.projectIndex].name;
-                categoriesElement.innerHTML = projects[object.userData.projectIndex].categories;
-                infoContainer.style.display = "block";
-            } else {
-                object.scale.set(1, 1, 1);
-                infoContainer.style.display = "none";
-            }
-        }
-    }
-
-
-    window.addEventListener('mousedown', onMouseDown);
-    window.addEventListener('mousemove', onMouseMove);
-    window.addEventListener('mouseup', onMouseUp);
-
+    window.addEventListener('touchstart', onPointerDown);
+    window.addEventListener('touchmove', onPointerMove);
+    window.addEventListener('touchend', onPointerUp);
 
     updateProjectSpheres();
+
 
 
 
