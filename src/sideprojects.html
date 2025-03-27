@@ -170,6 +170,11 @@ description: Welkom! Hier laat ik al mijn sideprojects zien die niet op mijn por
 
                 texture.colorSpace = THREE.SRGBColorSpace;
                 texture.encoding = THREE.sRGBEncoding;
+
+                texture.anisotropy = renderer.capabilities.getMaxAnisotropy();
+                texture.magFilter = THREE.LinearFilter;
+                texture.minFilter = THREE.LinearMipmapLinearFilter;
+                texture.generateMipmaps = true;
                 
                 const imagePlane = new THREE.Mesh(planeGeometry, planeMaterial);
                 imagePlane.userData.isProjectImage = true;
