@@ -60,12 +60,10 @@
 
             .image {
                 min-width: 45%;
-                max-height: calc(100vw - $margin-mobile);
                 object-fit: cover;
                 border-radius: 16px;
 
                 @media only screen and (min-width:v.$lg){
-                    max-height: none;
                     height: 86%;
                 }
             }
