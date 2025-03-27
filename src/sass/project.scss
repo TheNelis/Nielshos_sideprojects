@@ -60,14 +60,18 @@
 
             .image {
                 min-width: 45%;
-                height: 86%;
                 object-fit: cover;
                 border-radius: 16px;
+
+                @media only screen and (min-width:v.$lg){
+                    height: 86%;
+                }
             }
 
             .textcontainer {
                 color: black;
                 margin-top: 60px;
+                margin-bottom: 10px;
 
                 @media only screen and (min-width:v.$lg){
                     padding: v.$margin-desktop;

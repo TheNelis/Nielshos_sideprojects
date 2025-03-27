@@ -81,6 +81,10 @@ textarea:not([rows]) {
   src: url(../assets/fonts/Lilita_One/LilitaOne-Regular.ttf) format("truetype");
 }
 @font-face {
+  font-family: "Poppins-Light";
+  src: url(../assets/fonts/Poppins/Poppins-Light.ttf) format("truetype");
+}
+@font-face {
   font-family: "Poppins-LightItalic";
   src: url(../assets/fonts/Poppins/Poppins-LightItalic.ttf) format("truetype");
 }
@@ -478,13 +482,18 @@ body {
 }
 .slidercontainer__section__first .image {
   min-width: 45%;
-  height: 86%;
   object-fit: cover;
   border-radius: 16px;
+}
+@media only screen and (min-width: 992px) {
+  .slidercontainer__section__first .image {
+    height: 86%;
+  }
 }
 .slidercontainer__section__first .textcontainer {
   color: black;
   margin-top: 60px;
+  margin-bottom: 10px;
 }
 @media only screen and (min-width: 992px) {
   .slidercontainer__section__first .textcontainer {
