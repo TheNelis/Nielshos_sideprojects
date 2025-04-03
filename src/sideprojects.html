@@ -84,7 +84,7 @@ description: Welkom! Hier laat ik al mijn sideprojects zien die niet op mijn por
 
 
 
-    // Functie om alle kruispunten van de draadframe bol te vinden
+    // Functie om alle kruispunten van de wireframeframe bol te vinden
     function getAllVertices(geometry) {
         const positionAttribute = geometry.getAttribute('position');
         const vertices = [];
@@ -203,7 +203,6 @@ description: Welkom! Hier laat ik al mijn sideprojects zien die niet op mijn por
     const dragThreshold = 5; // pixels
     let mouseDownPos = { x: 0, y: 0 };
 
-    // 🔹 Ondersteuning voor touch en muis
     function getMousePos(event) {
         let x, y;
         if (event.touches) { // Touchscreen
@@ -279,7 +278,19 @@ description: Welkom! Hier laat ik al mijn sideprojects zien die niet op mijn por
         isDragging = false;
     }
 
-    // 🔹 Voeg zowel muis- als touch-events toe
+    function applyHoverEffect(object, isHovering) {
+        const projectIndex = object.userData.projectIndex;
+        if (projectIndex === undefined) return;
+        
+        if (isHovering) {
+            document.getElementById('projectTitle').innerHTML = projects[projectIndex].name;
+            document.getElementById('projectCategories').innerHTML = projects[projectIndex].categories;
+            document.getElementById('projectInfo-container').style.display = 'block';
+        } else {
+            document.getElementById('projectInfo-container').style.display = 'none';
+        }
+    }
+
     window.addEventListener('mousedown', onPointerDown);
     window.addEventListener('mousemove', onPointerMove);
     window.addEventListener('mouseup', onPointerUp);
